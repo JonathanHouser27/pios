@@ -1,3 +1,7 @@
+char glbl[128];
+
+char huge_array[8192];
+
 
 // function to retrieve the counter
 unsigned long get_timer_count() {
@@ -19,7 +23,7 @@ void wait_1ms() {
 }
 
 
-// function to call for the timer method, wait 1ms, and 
+// function to call for the timer method, wait 1ms, and
 void kernel_main() {
 
   unsigned long timer_value = get_timer_count();
@@ -27,6 +31,17 @@ void kernel_main() {
   wait_1ms();
 
   timer_value = get_timer_count();
+
+  extern int __bss_start, __bss_end;
+  char *bssstart, *bssend, *i;
+
+  bssstart = &__bss_start;
+  bssend = &__bss_end;
+
+  // for loop to go throughout the bss and change the values to 0
+  for(*i = *bssstart; *i <= *bssend; i++){
+   *i = 0;
+  }
 
   while(1) {
 
