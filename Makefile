@@ -1,5 +1,4 @@
 
-
 CC := aarch64-linux-gnu-gcc
 LD := aarch64-linux-gnu-ld
 OBJDUMP := aarch64-linux-gnu--objdump
@@ -15,10 +14,11 @@ SDIR = src
 OBJS = \
 	boot.o \
 	kernel_main.o \
-
+	list.o \
 
 
 OBJ = $(patsubst %,$(ODIR)/%,$(OBJS))
+
 
 $(ODIR)/%.o: $(SDIR)/%.c
 	$(CC) $(CFLAGS) -c -g -o $@ $^
