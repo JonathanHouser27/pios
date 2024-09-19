@@ -1,9 +1,18 @@
+#ifndef LIST_H
+#define LIST_H
 
-// structure for singly linked list
-struct list_element {
-
-  struct list_element *next; // pointer to the next element in the list
-  int data;  // data stored in this element
-
+// Definition of a list element
+struct obj {
+    struct obj *next;
+    int data;
 };
 
+//declaration of obj *head
+extern struct obj *head;
+
+// Functions
+void list_add(struct obj **list_head, struct obj *new_element);
+void list_remove(struct obj *element);
+
+
+#endif //LIST_H
