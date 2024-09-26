@@ -1,5 +1,6 @@
 #include "list.h"
-#include <stdio.h>
+#include "serial.c"
+//#include <stdio.h>
 
 // Global head of the list
 struct obj *head = NULL;
