@@ -1,3 +1,4 @@
+
 /*
  * This file was automatically generated using arm64-pgtable-tool.
  * See: https://github.com/ashwio/arm64-pgtable-tool
@@ -38,10 +39,10 @@
     .balign 2
 
     mmu_lock: .4byte 0                   // lock to ensure only 1 CPU runs init
-    #define LOCKED 1
+//    #define LOCKED 1
 
     mmu_init: .4byte 0                   // whether init has been run
-    #define INITIALISED 1
+//    #define INITIALISED 1
 
     .section .text.mmu_on
     .balign 2
@@ -52,7 +53,7 @@ mmu_on:
 
     ADRP    x0, mmu_lock                 // get 4KB page containing mmu_lock
     ADD     x0, x0, :lo12:mmu_lock       // restore low 12 bits lost by ADRP
-    MOV     w1, #LOCKED
+    MOV     w1, #1
     SEVL                                 // first pass won't sleep
 1:
     WFE                                  // sleep on retry
@@ -73,7 +74,8 @@ zero_out_tables:
     LDR     x2, =0x200000                // address of first table
     LDR     x3, =0x2000                  // combined length of all tables
     LSR     x3, x3, #5                   // number of required STP instructions
-    FMOV    d0, xzr                      // clear q0
+    MOV     X0, #0
+//    FMOV    d0, x0                       // clear q0
 1:
     STP     q0, q0, [x2], #32            // zero out 4 table entries at a time
     SUBS    x3, x3, #1
@@ -87,7 +89,7 @@ load_descriptor_templates:
     LDR     x5, =0x20000000000703        // RW data page
     LDR     x20, =0x781                  // code block
     LDR     x21, =0x783                  // code page
-    
+
 
 program_table_0:
 
@@ -120,7 +122,7 @@ program_table_1_entry_0:
 
 init_done:
 
-    MOV     w2, #INITIALISED
+    MOV     w2, #1
     STR     w2, [x1]
 
 end:

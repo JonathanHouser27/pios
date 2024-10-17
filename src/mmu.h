@@ -1,5 +1,5 @@
-#ifndef MMU_H
-#define MMU_H
+
+
 
 // L1 table structure
 struct table_descriptor_stage1 {
@@ -42,12 +42,6 @@ struct page_descriptor_stage1 {
     unsigned int ignored1    : 1;
 }__attribute__((packed));
 
-extern struct table_descriptor_stage1 L1table[512]; // lvl 1 page table
-extern struct page_descriptor_stage1 L2table[512]; // lvl 2 page table
-
 
 void mapPages(void *vaddr, void *paddr);
-int loadPageTable(struct table_descriptor_stage1 *L1table);
-
-
-#endif // MMU_H
+extern int loadPageTable(struct table_descriptor_stage1 *L1table);

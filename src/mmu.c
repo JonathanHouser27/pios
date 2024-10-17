@@ -30,7 +30,7 @@ void mapPages(void *vaddr, void *paddr) {
     L2table[L2tableIndex].sh = 3; // Set inner sharable
     L2table[L2tableIndex].ap = 0; // Access permission, kernel RW
     L2table[L2tableIndex].af = 1; // ??
-    L2table[L2tableIndex].output_addr = (unsigned int)paddr >> 12;
+    L2table[L2tableIndex].output_addr = (unsigned int)paddr >> 12; //
 }
 
 
@@ -54,7 +54,7 @@ int loadPageTable(struct table_descriptor_stage1 *L1table) {
     if(r&(0xF<<28)/*4k*/ || b<1/*36 bits*/) {
 //        uart_puts("ERROR: 4k granule or 36 bit address space not supported\n");
         return -1;
-    }
+    }   
     // first, set Memory Attributes array, indexed by PT_MEM, PT_DEV, PT_NC in our example
     r=  (0xFF << 0) |    // AttrIdx=0: normal, IWBWA, OWBWA, NTR
         (0x04 << 8) |    // AttrIdx=1: device, nGnRE (must be OSH too)
