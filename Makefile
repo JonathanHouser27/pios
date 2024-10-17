@@ -14,10 +14,12 @@ SDIR = src
 OBJS = \
 	boot.o \
 	kernel_main.o \
+	mmusetup.o \
 	page.o \
+	serial.o \
 	mmu.o \
-	rprintf.o \
 	list.o \
+	rprintf.o \
 
 
 OBJ = $(patsubst %,$(ODIR)/%,$(OBJS))
