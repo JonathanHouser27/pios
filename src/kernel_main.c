@@ -1,6 +1,9 @@
 #include "rprintf.h"
 #include "rprintf.c"
 #include "serial.c"
+#include "mmu.h"
+#include "mmu.c"
+
 
 char glbl[128];
 
@@ -46,7 +49,6 @@ void kernel_main() {
 
   print_execution_level();
 
-
   unsigned long timer_value = get_timer_count();
   wait_1ms();
   timer_value = get_timer_count();
@@ -61,6 +63,16 @@ void kernel_main() {
   for(*i = *bssstart; *i <= *bssend; i++){
    *i = 0;
   }
+
+  // memory mapping: map va to pa
+  void *virtual_address = (void *)0x40000000;
+  void *physical_address = (void *)0x3F000000;
+
+  mapPages(virtual_address, physical_address);
+
+  // enable MMU
+  mmu_on();
+
 
   while(1) {
 
