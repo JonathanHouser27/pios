@@ -39,11 +39,11 @@ void list_remove(struct obj *element) {
 }
 
 void print_list() {
-    printf("Linked list:\n");
+    //printf("Linked list:\n");
     struct obj *current = head;
     while (current != NULL) {
-        printf("Data: 0x%lx, Address: %p, Next Address: %p\n",
-               current->data, (void*)current, (void*)current->next);
+       // printf("Data: 0x%lx, Address: %p, Next Address: %p\n",
+//               current->data, (void*)current, (void*)current->next);
         current = current->next;
     }
 }
@@ -63,7 +63,7 @@ int main() {
     list_add(&head, &elements[0]);  // Adding 0xDEAD
 
     // Print the linked list with debug information
-    print_list();
+    //print_list();
 
     // Remove the first element (which was added first)
     if (head != NULL) {
@@ -73,8 +73,8 @@ int main() {
     }
 
     // Print the linked list after removal
-    printf("\nLinked list after removal:\n");
-    print_list();
+    //printf("\nLinked list after removal:\n");
+    //print_list();
 
     return 0;
 }
