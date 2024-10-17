@@ -1,6 +1,6 @@
 #include "list.h"
-#include "serial.c"
-
+#include "serial.h"
+//#include <stdio.h>
 #ifndef NULL
 #define NULL ((void*)0)
 #endif

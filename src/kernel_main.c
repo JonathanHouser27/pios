@@ -1,9 +1,7 @@
 #include "rprintf.h"
-#include "rprintf.c"
-#include "serial.c"
+#include "serial.h"
 #include "mmu.h"
-#include "mmu.c"
-
+#include "list.h"
 
 char glbl[128];
 
@@ -65,8 +63,8 @@ void kernel_main() {
   }
 
   // memory mapping: map va to pa
-  void *virtual_address = (void *)0x40000000;
-  void *physical_address = (void *)0x3F000000;
+  void *virtual_address = (void *)0x00000000;
+  void *physical_address = (void *)0x00200000;
 
   mapPages(virtual_address, physical_address);
 
