@@ -3,13 +3,11 @@
 #include "mmu.h"
 #include "list.h"
 #include "delays.h"
+#include "fat.h"
 
 char glbl[128];
-
 char huge_array[8192];
-
 unsigned int el;
-
 unsigned int getEL(){
   asm("mrs %0, CurrentEL"
     :"=r"(el)
@@ -23,13 +21,28 @@ void print_execution_level() {
   esp_printf(putc, "Current Execution Level is %d\r\n", el);
 }
 
-// MOVED TO DELAYS.H
-
 void kernel_main() {
 
-//  fatInit();
-//  fatOpen("file_name", struct rde *r);
-//  fatRead(char* buf, int n, struct rde *r);
+  if(fatInit() != 0) {
+    esp_printf(putc, "FAT initialization failed!\n");
+    return;
+  }
+  esp_printf(putc, "FAT filesystem initialized successfully.\n");
+
+  struct root_directory_entry rde;
+  if(fatOpen("TEST    TXT", &rde) == 0){
+    char buf[512]; // Buffer to hold read data
+
+    int bytes_read = fatRead(&rde, buf, sizeof(buf)); // Read data
+    if (bytes_read > 0) {
+      buf[bytes_read] = '\0'; // Null-terminate
+      esp_printf(putc, "Read %d bytes: %s\n", bytes_read, buf);
+      } else {
+        esp_printf(putc, "Failed to read file\n");
+      }
+  } else {
+    esp_printf(putc, "File not found\n");
+  }
 
   print_execution_level();
   // call to the delays file with the wait_msec fuction
@@ -60,4 +73,3 @@ void kernel_main() {
 
   }
 }
-
