@@ -22,6 +22,8 @@ OBJS = \
 	delays.o \
 	rprintf.o \
 	sd.o \
+	fat.o \
+
 
 OBJ = $(patsubst %,$(ODIR)/%,$(OBJS))
 
@@ -68,4 +70,4 @@ rootfs.img:
 	sudo mkdir /mnt/disk/etc
 	sudo bash -c "echo test > /mnt/disk/test"
 	sudo umount /mnt/disk
-	
+
