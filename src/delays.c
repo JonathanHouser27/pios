@@ -9,7 +9,7 @@ unsigned long get_timer_count() {
 }
 
 // function to insert 'nop' into the cpu for as many cycles as desired
-void wait_cycles(unsigned int number_of_cycles) {
+void wait_cycles(unsigned long number_of_cycles) {
   while (number_of_cycles > 0) {
     __asm__("nop"); // assembly inst for no operation to bypass a cycle
     number_of_cycles--;
