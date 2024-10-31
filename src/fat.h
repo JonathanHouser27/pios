@@ -78,5 +78,9 @@ struct file {
     uint32_t start_cluster;
 };
 
+int fatInit();
+int fatOpen(const char *filename, struct root_directory_entry *r);
+int fatRead(struct root_directory_entry *r, char *buf, int n);
+
 
 #endif
