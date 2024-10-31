@@ -87,6 +87,8 @@ static void outs( charptr lp)
    padding( left_flag);
    }
 
+
+
 /*---------------------------------------------------*/
 /*                                                   */
 /* This routine moves a number to the output buffer  */
@@ -163,7 +165,7 @@ void esp_printf( const func_ptr f_ptr, charptr ctrl, ...)
   va_start(args, *ctrl);
   esp_vprintf(f_ptr, ctrl, args);
   va_end( args );
-  
+
 }
 
 void esp_vprintf( const func_ptr f_ptr, charptr ctrl, va_list argp)
@@ -228,7 +230,7 @@ try_next:
          case 'l':
               long_flag = 1;
               break;
-	
+
          case 'i':
          case 'd':
               if (long_flag || ch == 'D') {
@@ -280,5 +282,6 @@ try_next:
       }
    va_end( argp);
    }
+
 
 /*---------------------------------------------------*/

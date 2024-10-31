@@ -45,3 +45,5 @@ struct page_descriptor_stage1 {
 
 void mapPages(void *vaddr, void *paddr);
 extern int loadPageTable(struct table_descriptor_stage1 *L1table);
+
+extern void mmu_on(void);

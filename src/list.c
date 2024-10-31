@@ -1,5 +1,6 @@
 #include "list.h"
 #include "serial.h"
+#include "rprintf.h"
 //#include <stdio.h>
 #ifndef NULL
 #define NULL ((void*)0)
@@ -23,27 +24,23 @@ void list_remove(struct obj *element) {
     if (element == NULL)
         return;
 
-    if (element == head) {
-        head = element->next;
-        return;
-    }
-
     struct obj **current = &head;
-    while (*current != NULL && *current != element) {
-        current = &(*current)->next;
-    }
 
-    if (*current != NULL) {
-        *current = (*current)->next;
+    while (*current != NULL) {
+	if (*current == element) {
+	    *current = element->next;
+	    return;
+	}
     }
+    current = &(*current)->next;
 }
 
 void print_list() {
     //printf("Linked list:\n");
     struct obj *current = head;
     while (current != NULL) {
-       // printf("Data: 0x%lx, Address: %p, Next Address: %p\n",
-//               current->data, (void*)current, (void*)current->next);
+        esp_printf(putc, "Data: 0x%lx, Address: %p, Next Address: %p\n",
+               current->data, (void*)current, (void*)current->next);
         current = current->next;
     }
 }

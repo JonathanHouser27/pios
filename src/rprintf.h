@@ -6,9 +6,9 @@
 //#include <string.h>
 #include <stdarg.h>
 
-typedef unsigned int size_t;
-
 #define NULL (void*)0
+
+typedef unsigned int size_t;
 
 int isdig(int c); // hand-implemented alternative to isdigit(), which uses a bunch of c library functions I don't want to include.
 
