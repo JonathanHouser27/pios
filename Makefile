@@ -14,13 +14,12 @@ SDIR = src
 OBJS = \
 	boot.o \
 	kernel_main.o \
+	mmu.o \
 	mmusetup.o \
 	page.o \
 	serial.o \
-	mmu.o \
 	list.o \
-	rprintf.o \
-
+	delays.o \
 
 OBJ = $(patsubst %,$(ODIR)/%,$(OBJS))
 
@@ -65,5 +64,6 @@ rootfs.img:
 	sudo mkdir -p /mnt/disk/boot/firmware
 	sudo mkdir /mnt/disk/bin
 	sudo mkdir /mnt/disk/etc
+	sudo bash -c "echo test > /mnt/disk/test"
 	sudo umount /mnt/disk
-
+	
