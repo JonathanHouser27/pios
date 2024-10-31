@@ -1,5 +1,4 @@
 #include "rprintf.h"
-#include "rprintf.c"
 #include "serial.h"
 #include "mmu.h"
 #include "list.h"
