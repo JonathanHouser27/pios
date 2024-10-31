@@ -20,6 +20,8 @@ OBJS = \
 	serial.o \
 	list.o \
 	delays.o \
+	rprintf.o \
+	sd.o \
 
 OBJ = $(patsubst %,$(ODIR)/%,$(OBJS))
 
